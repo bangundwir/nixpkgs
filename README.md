@@ -12,7 +12,7 @@ nix flake show github:bangundwir/nixpkgs
 
 ```bash
 # nix develop github:bangundwir/nixpkgs#<NAME>
-nix develop github:rbangundwir/nixpkgs#python
+nix develop github:bangundwir/nixpkgs#python
 ```
 
 #### Update lock file
