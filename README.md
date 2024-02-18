@@ -5,14 +5,14 @@
 #### Show information about this flake
 
 ```bash
-nix flake show github:r17x/nixForEverybody
+nix flake show github:bangundwir/nixpkgs
 ```
 
 #### Using nix shell remotely
 
 ```bash
-# nix develop github:r17x/nixForEverybody#<NAME>
-nix develop github:r17x/nixForEverybody#python
+# nix develop github:bangundwir/nixpkgs#<NAME>
+nix develop github:rbangundwir/nixpkgs#python
 ```
 
 #### Update lock file
