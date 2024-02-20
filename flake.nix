@@ -7,9 +7,8 @@
     utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, home-manager,utils }@inputs:
+  outputs = { self, nixpkgs, home-manager}:
     let
-    inherit (self.lib) attrValues makeOvveridable singleton optionalAttrs;
 
       system = "x86_64-linux";
       pkgs = import nixpkgs {
