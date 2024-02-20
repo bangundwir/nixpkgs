@@ -1,9 +1,9 @@
 {pkgs, ...}: {
     home.username = "hades";
     home.homeDirectory = "/home/hades";
-    home.packages = [
-        pkgs.cowsay
-        pkgs.bat
+    home.packages = with pkgs; [
+        cowsay
+        bat
 
     ];
     home.stateVersion = "22.11"; # To figure this out you can comment out the line and see what version it expected.
