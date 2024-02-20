@@ -41,6 +41,7 @@ Install Nix via the **recommended** [multi-user installation](https://nixos.org/
 
 ```bash
 $ sh <(curl -L https://nixos.org/nix/install) --daemon
+grep 'experimental-features' /etc/nix/nix.conf || (echo 'experimental-features = nix-command flakes' >> /etc/nix/nix.conf)
 ```
 
 We recommend the multi-user install if you are on Linux running systemd, with SELinux disabled and you can authenticate with `sudo`.
@@ -51,6 +52,7 @@ Install Nix via the [single-user installation](https://nixos.org/manual/nix/stab
 
 ```bash
 $ sh <(curl -L https://nixos.org/nix/install) --no-daemon
+grep 'experimental-features' /etc/nix/nix.conf || (echo 'experimental-features = nix-command flakes' >> /etc/nix/nix.conf)
 ```
 
 Above command will perform a single-user installation of Nix, meaning that `/nix` is owned by the invoking user. You should run this under your usual user account, not as `root`. The script will invoke `sudo` to create `/nix` if it doesn’t already exist.
@@ -101,4 +103,35 @@ di konfigurasi shell Anda. Atau sumberkan
 /etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh
 ```
 
+#### Konfigurasi Shell
+
+Anda perlu mengonfigurasi shell Anda untuk menggunakan direnv. Tambahkan baris berikut ke file konfigurasi shell Anda (misalnya `~/.bashrc` atau `~/.zshrc`):
+
+```bash
+eval "$(direnv hook bash)" # untuk bash
+eval "$(direnv hook zsh)" # untuk zsh
+```
+
+#### Penggunaan nix-direnv
+
+Untuk menggunakan nix-direnv, Anda perlu membuat file `.envrc` di direktori proyek Anda dengan isi:
+
+```bash
+use nix
+```
+
+atau jika Anda menggunakan Nix Flakes:
+
+```bash
+use flake
+```
+
+Kemudian, izinkan direnv untuk memuat konfigurasi tersebut dengan perintah:
+
+```bash
+bash
+direnv allow
+```
+
+Saat Anda memasuki direktori proyek, direnv akan secara otomatis mengaktifkan lingkungan yang didefinisikan dalam `shell.nix` atau `flake.nix`
 
