@@ -4,10 +4,13 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
+    utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, home-manager }:
+  outputs = { self, nixpkgs, home-manager,utils }@inputs:
     let
+    inherit (self.lib) attrValues makeOvveridable singleton optionalAttrs;
+
       system = "x86_64-linux";
       pkgs = import nixpkgs {
         inherit system;
@@ -35,7 +38,8 @@
       };
 
       devShells.x86_64-linux = import ./devShells.nix { 
-        inherit pkgs;   
+          pkgs = self.legacyPackages.${system};
+        # inherit pkgs;   
           };
     };
 }
