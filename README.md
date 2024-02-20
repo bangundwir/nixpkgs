@@ -29,6 +29,7 @@ nix flake lock --update-input nixpkgs
 ## Catatan Home Manager
 
 ```bash
+home-manager build --flake .
 home-manager switch --flake .
 ```
 
