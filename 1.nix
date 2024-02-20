@@ -7,8 +7,9 @@
     utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, home-manager, utils}:
+  outputs = { self, nixpkgs, home-manager}:
     let
+
       system = "x86_64-linux";
       pkgs = import nixpkgs {
         inherit system;
@@ -38,9 +39,9 @@
         };
       };
 
-      devShells.x86_64-linux = import ./devShells.nix {
-          pkgs = utils.lib.legacyPackages.${system};
-      };
+      devShells.x86_64-linux = import ./devShells.nix { 
+          pkgs = self.legacyPackages.${system};
+        # inherit pkgs;   
+          };
     };
 }
-
