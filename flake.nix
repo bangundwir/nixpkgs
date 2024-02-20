@@ -23,9 +23,7 @@
       #     buildInputs =
       #       [
       #         pkgs.bat
-      #         pkgs.git
-      #         pkgs.gdu
-      #       ];
+      #         pkgs.git pkgs.gdu ];
       #   };
       # };
 
