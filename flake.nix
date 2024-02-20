@@ -1,37 +1,43 @@
 {
-  description = "selamat datang di nix";
-  inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    u.url = "github:numtide/flake-utils";
-  };
-  outputs = inputs: inputs.u.lib.eachDefaultSystem (system:
-    let
-      pkgs = inputs.nixpkgs.legacyPackages.${system};
+  description = "Hades nix System";
 
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    home-manager.url = "github:nix-community/home-manager";
+  };
+
+  outputs = { self, nixpkgs, home-manager }:
+    let
+      system = "x86_64-linux";
+      pkgs = import nixpkgs {
+        inherit system;
+      };
     in
     {
-      devShells = {
-        # nix develop 
-        # empty
-        default = pkgs.mkShell {
-          buildInputs = [ ];
-        };
-        # nix develop .#python
-        # same-thing: nix-shell -p python3
-        python = pkgs.mkShell {
-          buildInputs = [ pkgs.python3 ];
-        };
-        # nix develop .#nodejs
-        # same-thing: nix-shell -p nodejs
-        nodejs = pkgs.mkShell {
-          buildInputs = [ pkgs.nodejs pkgs.nodePackages.yarn pkgs.nodePackages.pnpm ];
-        };
-        # nix develop .#go
-        # same-thing: nix-shell -p go
-        go = pkgs.mkShell {
-          buildInputs = [ pkgs.go ];
+      # devShells.x86_64-linux = {
+      #   default = pkgs.mkShell {
+      #     buildInputs = [ ];
+      #   };
+      #
+      #   python = pkgs.mkShell {
+      #     buildInputs =
+      #       [
+      #         pkgs.bat
+      #         pkgs.git
+      #         pkgs.gdu
+      #       ];
+      #   };
+      # };
+
+      homeConfigurations = {
+        hades = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [ ./home/home.nix ];
         };
       };
-    }
-  );
+
+      devShells.x86_64-linux = import ./devShells.nix { 
+        inherit pkgs;   
+          };
+    };
 }
