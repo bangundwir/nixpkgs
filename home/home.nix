@@ -5,6 +5,15 @@
         cowsay
         bat
         ranger
+        vim
+        btop
+        gdu
+
+        zsh
+        neofetch
+        unzip
+        fzf
+        fzf-zsh
 
         #font
         fira-code
