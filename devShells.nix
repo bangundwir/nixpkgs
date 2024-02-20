@@ -14,4 +14,7 @@
   python = pkgs.mkShell {
     buildInputs = [ pkgs.python3 ];
   };
+  go = pkgs.mkShell {
+    buildInputs = [ pkgs.go ];
+  };
 }
