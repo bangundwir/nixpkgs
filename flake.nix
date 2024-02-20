@@ -36,8 +36,7 @@
         };
       };
 
-      devShells.x86_64-linux = import ./devShells.nix { 
-        inherit pkgs;   
-          };
+      # Mengimpor konfigurasi devShells dari devShells.nix dengan meneruskan pkgs
+      devShells.x86_64-linux = import ./devShells.nix { inherit pkgs; };
     };
 }
