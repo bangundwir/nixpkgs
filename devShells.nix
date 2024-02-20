@@ -12,6 +12,6 @@
     buildInputs = [ pkgs.bun ];
   };
   python = pkgs.mkShell {
-    buildInputs = [ pkgs.python ];
+    buildInputs = [ pkgs.python3 ];
   };
 }
